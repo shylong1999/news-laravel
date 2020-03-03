@@ -91,6 +91,9 @@ Route::get('/typography','MyController@typography')->name('typography');
 
 Auth::routes();
 
+Route::get('change-password', 'ChangePasswordController@index');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
