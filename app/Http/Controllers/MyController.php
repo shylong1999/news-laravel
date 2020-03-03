@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\News;
+use App\TypeNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -14,9 +16,13 @@ class MyController extends Controller
      */
     public function __construct()
     {
-
         $categories = Category::all();
+        $typeNewses = TypeNews::all();
+        $newses = News::all();
+        
         View::share('categories',$categories);
+        View::share('tyoeNewses',$typeNewses);
+        View::share('newses',$newses);
     }
 
     public function Demo(){
