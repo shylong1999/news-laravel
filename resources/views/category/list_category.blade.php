@@ -10,6 +10,9 @@
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div class="form-group">
+                    <input type="text" class="form-controller" id="search" name="search">
+                </div>
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr align="center">
@@ -44,5 +47,21 @@
         </div>
         <!-- /.container-fluid -->
     </div>
+    <script type="text/javascript">
+        $('#search').on('keyup',function(){
+            $value = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('search') }}',
+                data: {
+                    'search': $value
+                },
+                success:function(data){
+                    $('tbody').html(data);
+                }
+            });
+        })
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
 
 @endsection

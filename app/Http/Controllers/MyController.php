@@ -25,6 +25,39 @@ class MyController extends Controller
         View::share('newses',$newses);
     }
 
+
+    public function index()
+    {
+        $categories = Category::all();
+
+        return view('category.list_category', compact('categories'));
+    }
+
+    //search data
+    public function search(Request $request){
+        if ($request->ajax()) {
+            $output = '';
+            $categories = Category::where('name', 'LIKE', '%' . $request->search . '%')->get();
+            $Num = 1;
+            if ($categories) {
+                foreach ($categories as $key => $category) {
+                    $output .= '<tr class="odd gradeX" align="center">
+                    <td>' . $Num . '</td>
+                    <td>' . $category->name . '</td>
+                    <td>' . $category->unsigned_name . '</td>
+                   <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a
+                                        href="admin/category/delete/'.$category->id_cg.'"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a
+                                        href="admin/category/edit/'.$category->id_cg.'">Edit</a></td>
+                    </tr>';
+
+                    $Num++;
+                }
+            }
+
+            return Response($output);
+        }
+    }
     public function Demo(){
         return view('pages.demo');
     }
@@ -51,5 +84,7 @@ class MyController extends Controller
        $data = $request->all();
        print_r($data);
     }
+
+
 
 }

@@ -89,6 +89,8 @@ Route::get('/single-post','MyController@singlePost')->name('single-post');
 Route::get('/archive-blog','MyController@archiveBlog')->name('archive-blog');
 Route::get('/typography','MyController@typography')->name('typography');
 
+Route::get('/','MyController@index');
+Route::get('/search','MyController@search');
 Auth::routes();
 
 Route::get('change-password', 'ChangePasswordController@index');
